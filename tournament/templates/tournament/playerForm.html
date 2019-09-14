@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\playerForm.css' %}">
+</head>
+<body>
+    <form action="/tournament/register/player" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

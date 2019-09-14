@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+h1 {
+    font-family: Roboto;
+    text-align: center;
+    padding: 1rem;
+}
+
+table {
+    font-family: Roboto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    font-size: 1.5rem;
+    padding: 1.5rem 3rem;
+    background-color: lightseagreen;
+}
+
+td {
+    padding: 1rem 2rem;
+    background-color: lightgray;
+}

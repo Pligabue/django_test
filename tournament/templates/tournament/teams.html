@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\teams.css' %}">
+</head>
+<body>
+    <h1>Scoreboard</h1>
+    <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>P</th>
+            <th>GP</th>
+            <th>W</th>
+            <th>L</th>
+            <th>T</th>
+            <th>GD</th>
+            <th>Founded</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in teams %}
+        <tr>
+            <td>{{ team.name }}</td>
+            <td>{{ team.points }}</td>
+            <td>{{ team.games }}</td>
+            <td>{{ team.wins }}</td>
+            <td>{{ team.losses }}</td>
+            <td>{{ team.ties }}</td>
+            <td>{{ team.goal_difference }}</td>
+            <td>{{ team.founded }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</body>
+</html>
