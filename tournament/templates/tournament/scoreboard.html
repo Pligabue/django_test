@@ -1,11 +1,13 @@
 
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "tournament\header.html" %}
+
+{% block style %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'tournament\teams.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\table.css' %}">
+{% endblock %}
+    
+{% block content %}
+<div class="table">
     <h1>Scoreboard</h1>
     <table>
     <thead>
@@ -35,5 +37,5 @@
         {% endfor %}
     </tbody>
     </table>
-</body>
-</html>
+</div>
+{% endblock %}

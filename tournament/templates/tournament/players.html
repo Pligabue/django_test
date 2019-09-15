@@ -1,0 +1,35 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\table.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="table">
+    <h1>Players</h1>
+    <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>GP</th>
+            <th>Ranking</th>
+            <th>Birthday</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.name|add:" "|add:player.surname }}</td>
+            <td>{{ player.team.name }}</td>
+            <td>{{ player.games }}</td>
+            <td>{{ player.ranking }}</td>
+            <td>{{ player.birthday }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}

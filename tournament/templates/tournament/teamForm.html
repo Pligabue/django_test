@@ -5,11 +5,11 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'tournament\form.css' %}">
 {% endblock %}
-
+    
 {% block content %}
     <div class="form">
-        <h1>Register Player</h1>
-        <form action="/tournament/register/player/" method="post">
+        <h1>Register Team</h1>
+        <form action="/tournament/register/team/" method="post">
             {% csrf_token %}
             {{ form }}
             <div class="button-container">
