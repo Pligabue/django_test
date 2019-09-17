@@ -33,3 +33,41 @@
     padding: 1rem 2rem;
     background-color: lightgray;
 }
+
+.games {
+    font-family: Roboto;
+    margin-bottom: 2rem;
+}
+
+.games h1 {
+    padding: 1rem;
+}
+
+.games .display-results {
+    background-color: lightgray;
+    border-bottom: solid white 1px;
+}
+
+.games .display-results h3 {
+    margin: 0;
+    padding: 1rem;
+    display: inline-block;
+}
+
+.games .left {
+    display: inline-block;
+    text-align: left;
+    width: 20%;
+}
+
+.games .right {
+    display: inline-block;
+    text-align: right;
+    width: 20%;
+}
+
+.games .center {
+    display: inline-block;
+    text-align: center;
+    width: 10%;
+}

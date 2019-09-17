@@ -24,8 +24,8 @@
         <tr>
             <td>{{ player.name|add:" "|add:player.surname }}</td>
             <td>{{ player.team.name }}</td>
-            <td>{{ player.games }}</td>
-            <td>{{ player.ranking }}</td>
+            <td>{{ player.nGames }}</td>
+            <td>{{ player.rating|default_if_none:"-" }}</td>
             <td>{{ player.birthday }}</td>
         </tr>
         {% endfor %}
