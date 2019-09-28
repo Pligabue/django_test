@@ -43,6 +43,11 @@
     padding: 1rem;
 }
 
+.games a, .games a:visited {
+    text-decoration: none;
+    color: black;
+}
+
 .games .display-results {
     background-color: lightgray;
     border-bottom: solid white 1px;

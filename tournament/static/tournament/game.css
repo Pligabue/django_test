@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.game {
+    display: inline-block;
+    width: 50%;
+    font-family: Roboto;
+    text-align: center;
+}
+
+.game h1 {
+    padding: 2rem;
+    background-color: lightseagreen;
+    margin-bottom: 1px;
+}
+
+.game .team-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.game .team-item {
+    background-color: lightgray;
+    border: solid 1px white;
+}

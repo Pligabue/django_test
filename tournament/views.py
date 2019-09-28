@@ -94,6 +94,17 @@ def regTeam(request):
         form = TeamForm()
         return render(request, "tournament/teamForm.html", {"form": form})
 
+def game(request, id):
+    game = Game.objects.get(pk=id)
+    ratings = Rating.objects.filter(game=game)
+    home_players = []
+    away_players = []
+    for rating in ratings:
+        if rating.player.team == game.team_1:
+            home_players.append(rating.player)
+        elif rating.player.team == game.team_2:
+            away_players.append(rating.player)
+    return render(request, "tournament/game.html", {"game": game, "home_players": home_players, "away_players": away_players})
 
 
 

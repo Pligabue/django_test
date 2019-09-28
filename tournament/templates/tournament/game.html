@@ -1,0 +1,29 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\game.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="game">
+        <h1>Round {{ game.round }}: {{ game.team_1.name }} vs {{ game.team_2.name }} ({{ game.score_team_1 }} x {{ game.score_team_2 }})</h1>
+        <div class="team-container">
+            <h3 class="team-item">{{ game.team_1.name }}</h3>
+            <h3 class="team-item">{{ game.team_2.name }}</h3>
+            <h4 class="team-item">{{ game.score_team_1 }}</h4>
+            <h4 class="team-item">{{ game.score_team_2 }}</h4>
+            <div class="team-item">
+                {% for player in home_players %}
+                    <h4>{{ player.name }}</h4>
+                {% endfor %}
+            </div>
+            <div class="team-item">
+                {% for player in away_players %}
+                    <h4>{{ player.name }}</h4>
+                {% endfor %}
+            </div>
+        </div>    
+    </div>
+{% endblock %}

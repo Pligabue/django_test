@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from tournament import views as views_tournament
+from home import views as views_home
 
 urlpatterns = [
     path("tournament/", include("tournament.urls")),
+    path("", views_home.home, name="home"),
+    path("home/", views_home.home, name="home"),
     path('admin/', admin.site.urls),
 ]
