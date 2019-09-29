@@ -17,3 +17,10 @@ class TeamForm(forms.ModelForm):
         widgets = {
             "founded": forms.DateInput(attrs={"type": "date"})
         }
+
+class CoachForm(forms.Form):
+    team = forms.ModelChoiceField(queryset=Team.objects.filter(coach=None))
+    name = forms.CharField(label="Name", max_length=100)
+    surname = forms.CharField(label="Surname", max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput())
+    birthday = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))

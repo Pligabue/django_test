@@ -11,6 +11,8 @@
     padding: 2rem;
     background-color: lightseagreen;
     margin-bottom: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 
 .game .team-container {
@@ -19,6 +21,8 @@
 }
 
 .game .team-item {
+    margin: 0;
+    padding: 1rem;
     background-color: lightgray;
     border: solid 1px white;
 }

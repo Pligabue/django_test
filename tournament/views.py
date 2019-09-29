@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Max
-from .models import Team, Player, Game, Rating
-from .forms import PlayerForm, TeamForm
+from django.contrib.auth.models import User
+from .models import Team, Player, Game, Rating, Coach
+from .forms import PlayerForm, TeamForm, CoachForm
 
 # Create your views here.
 
@@ -67,6 +68,21 @@ def players(request):
             player.rating = player.rating/(i+1)
     return render(request, "tournament/players.html", {"players" : players})
 
+def game(request, id):
+    game = Game.objects.get(pk=id)
+    ratings = Rating.objects.filter(game=game)
+    home_ratings = []
+    away_ratings = []
+    for rating in ratings:
+        if rating.player.team == game.team_1:
+            home_ratings.append(rating)
+        elif rating.player.team == game.team_2:
+            away_ratings.append(rating)
+    return render(request, "tournament/game.html", {"game": game, "home_ratings": home_ratings, "away_ratings": away_ratings})
+
+def register(request):
+    return render(request, "tournament/register.html")
+
 def regPlayer(request):
     if request.method == "POST":
         form = PlayerForm(request.POST)
@@ -74,7 +90,7 @@ def regPlayer(request):
             data = form.cleaned_data
             player = Player(team=data["team"], name=data["name"], surname=data["surname"], birthday=data["birthday"])
             player.save()
-            return HttpResponse("Foi")
+            return render(request, "tournament/success.html", {"name": "player"})
         return render(request, "tournament/playerForm.html", {"form": form})
     else:
         form = PlayerForm()
@@ -86,25 +102,62 @@ def regTeam(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            player = Team(name=data["name"], founded=data["founded"])
-            player.save()
-            return HttpResponse("Foi")
+            team = Team(name=data["name"], founded=data["founded"])
+            team.save()
+            return render(request, "tournament/success.html", {"name": "team"})
         return render(request, "tournament/teamForm.html", {"form": form})
     else:
         form = TeamForm()
         return render(request, "tournament/teamForm.html", {"form": form})
 
-def game(request, id):
-    game = Game.objects.get(pk=id)
-    ratings = Rating.objects.filter(game=game)
-    home_players = []
-    away_players = []
-    for rating in ratings:
-        if rating.player.team == game.team_1:
-            home_players.append(rating.player)
-        elif rating.player.team == game.team_2:
-            away_players.append(rating.player)
-    return render(request, "tournament/game.html", {"game": game, "home_players": home_players, "away_players": away_players})
+def regCoach(request):
+    if request.method == "POST":
+        form = CoachForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data)
+            user = User(username=(data["name"]+data["surname"]), password=data["password"], first_name=data["name"], last_name=data["surname"])
+            try:
+                user.save()
+            except Exception as error:
+                print(error)
+                return render(request, "tournament/coachForm.html", {"form": form})
+            coach = Coach(user=user, team=data["team"], birthday=data["birthday"])
+            try:    
+                coach.save()
+            except Exception as error:
+                print(error)
+                user.delete()
+                return render(request, "tournament/coachForm.html", {"form": form})
+            return render(request, "tournament/success.html", {"name": "coach"})
+        return render(request, "tournament/coachForm.html", {"form": form})
+    else:
+        form = CoachForm()
+        return render(request, "tournament/coachForm.html", {"form": form})
 
+
+def populate(request):
+
+    team1 = Team(name="Timaço", founded="1981-09-12")
+    team1.save()
+    team2 = Team(name="Time Antigo", founded="1019-02-05")
+    team2.save()
+    team3 = Team(name="Timinho", founded="1019-02-05")
+    team3.save()
+    team4 = Team(name="Pior Time da História", founded="2019-09-17")
+    team4.save()
+
+    player1 = Player(team=team1, name="Cerginho", surname="da Pereira Nunes", birthday="1977-10-26")
+    player1.save()
+    player2 = Player(team=team3, name="Craque", surname="Daniel", birthday="1980-04-07")
+    player2.save()
+    player3 = Player(team=team4, name="Pior jogador da história", surname="(é sério)", birthday="2000-09-17")
+    player3.save()
+    player4 = Player(team=team3, name="Julinho", surname="da Van", birthday="1981-05-25")
+    player4.save()
+    player5 = Player(team=team2, name="Seu Getúlio", surname="do Grunge", birthday="1900-02-22")
+    player5.save()
+    player6 = Player(team=team1, name="Poeta", surname="de Sunga", birthday="1985-10-10")
+    player6.save()
 
 

@@ -1,0 +1,14 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="success">
+        <h1>New {{ name }} was registered successfully!</h1>
+        <a href="/tournament/">Go back to the <span style="font-weight: bold">Homepage</span></a>
+    </div>
+{% endblock %}

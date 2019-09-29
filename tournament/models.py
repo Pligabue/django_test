@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Team(models.Model):
@@ -38,12 +39,11 @@ class Rating(models.Model):
 
 
 class Coach(models.Model):
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    team = models.OneToOneField(Team, on_delete=models.SET_NULL, null=True, related_name="coach")
     birthday = models.DateField()
 
     def __str__(self):
-        return self.name
+        return self.user.first_name + " " + self.user.last_name
 
 

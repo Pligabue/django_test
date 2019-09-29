@@ -12,29 +12,33 @@
     width: 100%;
 }
 
-.posts {
-    background-color: brown;
-}
-
-.tournament {
-    background-color: lightseagreen;
-}
-
 .flex-container a, .flex-container a:visited {
+    background-color: lightseagreen;
     display: inline-block;
     box-sizing: border-box;
-    padding: 16rem 2rem;
+    padding: 6rem 2rem;
     width: 100%;
     font-family: Roboto;
     font-size: 3rem;
     font-weight: bold;
     text-decoration: none;
     color: black;
-    opacity: 0.8;
-    transition: 0.3s;
 }
 
 .flex-container a:hover {
-    opacity: 1.0;
+    transition: 0.3s;
     transform: scale(1.05);
+}
+
+.flex-container .description {
+    font-family: Roboto;
+    font-size: 2rem;
+    z-index: -1;
+    position: relative;
+    top: -5rem;
+    transition: 0.3s;
+}
+
+.flex-container a:hover + .description {
+    top: 0;
 }

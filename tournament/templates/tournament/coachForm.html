@@ -1,0 +1,20 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <h1>Register Coach</h1>
+        <form action="/tournament/register/coach/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="button-container">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

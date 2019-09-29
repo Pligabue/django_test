@@ -77,3 +77,26 @@
 .errorlist li::before {
     content: "* ";
 }
+
+.success {
+    font-family: Roboto;
+    display: inline-block;
+}
+
+.success h1 {
+    background-color: lightseagreen;
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+.success a, .success a:visited {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: lightgray;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black;
+    padding: 2rem;
+}
+
