@@ -6,9 +6,12 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("scoreboard/", views.scoreboard, name="scoreboard"),
     path("players/", views.players, name="players"),
+    path("login/", views.loginCoach, name="login"),
     path("game/<int:id>", views.game, name="game"),
     path("register/", views.register, name="register"),
     path("register/player/", views.regPlayer, name="regPlayer"),
     path("register/team/", views.regTeam, name="regTeam"),
     path("register/coach/", views.regCoach, name="regCoach"),
+    path("populate/", views.populate, name="populate"),
+    path("current/", views.currentUser, name="currentUser"),
 ]

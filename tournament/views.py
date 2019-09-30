@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Max
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, password_validation, login
 from .models import Team, Player, Game, Rating, Coach
-from .forms import PlayerForm, TeamForm, CoachForm
+from .forms import PlayerForm, TeamForm, CoachForm, LoginForm
 
 # Create your views here.
 
@@ -68,6 +69,25 @@ def players(request):
             player.rating = player.rating/(i+1)
     return render(request, "tournament/players.html", {"players" : players})
 
+def loginCoach(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            
+            username = data["full_name"].replace(" ", "_")
+            print(username, data["password"])
+            user = authenticate(username=username, password=data["password"])
+
+            if user is not None:
+                login(request, user)
+                return HttpResponse(user.get_full_name())
+            else:
+                return HttpResponse("No user")
+    else:
+        form = LoginForm()
+        return render(request, "tournament/form.html", {"form": form, "title": "Log In", "url": "/tournament/login/"})
+
 def game(request, id):
     game = Game.objects.get(pk=id)
     ratings = Rating.objects.filter(game=game)
@@ -83,20 +103,6 @@ def game(request, id):
 def register(request):
     return render(request, "tournament/register.html")
 
-def regPlayer(request):
-    if request.method == "POST":
-        form = PlayerForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            player = Player(team=data["team"], name=data["name"], surname=data["surname"], birthday=data["birthday"])
-            player.save()
-            return render(request, "tournament/success.html", {"name": "player"})
-        return render(request, "tournament/playerForm.html", {"form": form})
-    else:
-        form = PlayerForm()
-        return render(request, "tournament/playerForm.html", {"form": form})
-
-
 def regTeam(request):
     if request.method == "POST":
         form = TeamForm(request.POST)
@@ -105,35 +111,49 @@ def regTeam(request):
             team = Team(name=data["name"], founded=data["founded"])
             team.save()
             return render(request, "tournament/success.html", {"name": "team"})
-        return render(request, "tournament/teamForm.html", {"form": form})
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Team", "url": "/tournament/register/team/"})
     else:
         form = TeamForm()
-        return render(request, "tournament/teamForm.html", {"form": form})
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Team", "url": "/tournament/register/team/"})
+
+def regPlayer(request):
+    if request.method == "POST":
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            player = Player(team=data["team"], name=data["name"], surname=data["surname"], birthday=data["birthday"])
+            player.save()
+            return render(request, "tournament/success.html", {"name": "player"})
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Player", "url": "/tournament/register/player/"})
+    else:
+        form = PlayerForm()
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Player", "url": "/tournament/register/player/"})
 
 def regCoach(request):
     if request.method == "POST":
         form = CoachForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            print(data)
-            user = User(username=(data["name"]+data["surname"]), password=data["password"], first_name=data["name"], last_name=data["surname"])
             try:
+                username = (data["first_name"]+"_"+data["last_name"]).replace(" ", "_")
+                user = User(username=username, first_name=data["first_name"], last_name=data["last_name"])
+                user.set_password(data["password1"])
                 user.save()
             except Exception as error:
-                print(error)
-                return render(request, "tournament/coachForm.html", {"form": form})
-            coach = Coach(user=user, team=data["team"], birthday=data["birthday"])
+                print("ERROR:", error)
+                return render(request, "tournament/form.html", {"form": form, "title": "Register Coach", "url": "/tournament/register/coach/"})
             try:    
+                coach = Coach(user=user, team=data["team"], birthday=data["birthday"])
                 coach.save()
             except Exception as error:
-                print(error)
+                print("ERROR:", error)
                 user.delete()
-                return render(request, "tournament/coachForm.html", {"form": form})
+                return render(request, "tournament/form.html", {"form": form, "title": "Register Coach", "url": "/tournament/register/coach/"})
             return render(request, "tournament/success.html", {"name": "coach"})
-        return render(request, "tournament/coachForm.html", {"form": form})
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Coach", "url": "/tournament/register/coach/"})
     else:
         form = CoachForm()
-        return render(request, "tournament/coachForm.html", {"form": form})
+        return render(request, "tournament/form.html", {"form": form, "title": "Register Coach", "url": "/tournament/register/coach/"})
 
 
 def populate(request):
@@ -160,4 +180,9 @@ def populate(request):
     player6 = Player(team=team1, name="Poeta", surname="de Sunga", birthday="1985-10-10")
     player6.save()
 
-
+def currentUser(request):
+    current_user = request.user
+    if current_user.is_authenticated:
+        return HttpResponse(str(current_user.coach) + ", " + str(current_user.coach.team) + "'s coach")
+    else:
+        return HttpResponse("No user") 
