@@ -35,10 +35,12 @@
     font-size: 2rem;
     z-index: -1;
     position: relative;
+    visibility: hidden;
     top: -5rem;
-    transition: 0.3s;
 }
 
 .flex-container a:hover + .description {
+    transition: 0.3s;
     top: 0;
+    visibility: visible;
 }

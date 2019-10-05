@@ -13,12 +13,18 @@
             <h2 class="description">Register a new team!</h2>
         </div>
         <div>
-            <a style="background-color: orange" href="/tournament/register/player">Player</a>
-            <h2 class="description">Register a new player!</h2>
-        </div>
-        <div>
             <a style="background-color: #f4511e" href="/tournament/register/coach">Coach</a>
             <h2 class="description">Register a new coach!</h2>
         </div>
+        {% if isCoach %}
+            <div>
+                <a style="background-color: orange" href="/tournament/register/player">Player</a>
+                <h2 class="description">Register a new player!</h2>
+            </div>
+            <div>
+                <a style="background-color: dodgerblue" href="/tournament/register/game">Game</a>
+                <h2 class="description">Register a new game!</h2>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

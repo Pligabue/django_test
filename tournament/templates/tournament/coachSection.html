@@ -1,0 +1,134 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\coachSection.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="coach-section">
+        <div class="flex-container">
+            <div>
+                <div class="club-info">
+                    <h1>{{ user.coach.team }}</h1>
+                    <p><span style="font-weight: bold">Founded: </span>{{ user.coach.team.founded }}</p>
+                    <p><span style="font-weight: bold">Coach: </span>{{ user.get_full_name }}</p>
+                    <p><span style="font-weight: bold">Players: </span>{{ numPlayers }}</p>
+                    <p><span style="font-weight: bold">Games: </span>{{ numGames }}</p>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3"><h1>Players</h1></th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ranking</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                    <tr>
+                        <td>{{ player.get_full_name }}</td>
+                        <td>{{ player.rating }}</td>
+                        <td>{{ player.birthday }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="games">
+                <thead>
+                    <tr>
+                        <th colspan="3"><h1>Games</h1></th>
+                    </tr>
+                    <tr>
+                        <th>Round</th>
+                        <th>Result</th>
+                        <th>Opponent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in games %}
+                    <tr>  
+                        <td><a href="/tournament/game/{{ game.id }}">{{ game.round }}</a></td>
+                        {% if game.team_1 == user.coach.team %}
+                        <td><a href="/tournament/game/{{ game.id }}">{{ game.score_team_1 }} x {{ game.score_team_2 }}</a></td>
+                        <td><a href="/tournament/game/{{ game.id }}">{{ game.team_2 }}</a></td>
+                        {% else %}
+                        <td><a href="/tournament/game/{{ game.id }}">{{ game.score_team_2 }} x {{ game.score_team_1 }}</a></td>
+                        <td><a href="/tournament/game/{{ game.id }}">{{ game.team_1 }}</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex-container">
+            {% if notApproved %}
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">To Be Approved</th>
+                        <th rowspan="2" class="action">Action</th>
+                    </tr>
+                    <tr>
+                        <th>Round</th>
+                        <th>Result</th>
+                        <th>Opponent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in notApproved %}
+                    <tr>  
+                        <td>{{ game.round }}</td>
+                        {% if game.team_1 == user.coach.team %}
+                        <td>{{ game.score_team_1 }} x {{ game.score_team_2 }}</td>
+                        <td>{{ game.team_2 }}</td>
+                        {% else %}
+                        <td>{{ game.score_team_2 }} x {{ game.score_team_1 }}</td>
+                        <td>{{ game.team_1 }}</td>
+                        {% endif %}
+                        <td class="approve-button">
+                            <a href="/tournament/game/{{ game.id }}/approve">Approve</a>
+                            <a href="/tournament/game/{{ game.id }}/delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            {% if pending %}
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">Pending Opponent's Approval</th>
+                    </tr>
+                    <tr>
+                        <th>Round</th>
+                        <th>Result</th>
+                        <th>Opponent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in pending %}
+                    <tr>  
+                        <td>{{ game.round }}</td>
+                        {% if game.team_1 == user.coach.team %}
+                        <td>{{ game.score_team_1 }} x {{ game.score_team_2 }}</td>
+                        <td>{{ game.team_2 }}</td>
+                        {% else %}
+                        <td>{{ game.score_team_2 }} x {{ game.score_team_1 }}</td>
+                        <td>{{ game.team_1 }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <a href="/tournament/coachsection/logout" class="logout">Log Out</a>
+    </div>
+{% endblock %}

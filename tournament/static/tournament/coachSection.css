@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.coach-section {
+    font-family: Roboto;
+    display: inline-block;
+}
+
+.club-info {
+    margin: 2rem;
+    padding: 1rem 2rem;
+    background-color: lightgray;
+    text-align: left;
+}
+
+.coach-section table {
+    margin: 2rem;
+}
+
+.coach-section thead {
+    background-color: lightseagreen;
+}
+
+.coach-section tbody {
+    background-color: lightgray;
+}
+
+.coach-section th, .coach-section td {
+    padding: 1rem 2rem;
+}
+
+.logout, .logout:visited {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black;
+    background-color: lightseagreen;
+    float: right;
+    margin: 1rem 2rem 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background-color: black;
+    color: lightseagreen;
+}
+
+.coach-section .games td {
+    padding: 0;
+}
+
+.coach-section .games a {
+    box-sizing: border-box;
+    display: block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: black;
+}
+
+.coach-section .games a:visited {
+    color: black;
+}
+
+.action {
+    background-color: black;
+    color: lightseagreen;
+}
+
+.approve-button {
+    background-color: lightseagreen;
+    padding: 1rem !important; 
+}
+
+.approve-button a, .approve-button a:visited {
+    background-color: lightseagreen;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.approve-button a:hover {
+    background-color: black;
+    color: lightseagreen;
+}

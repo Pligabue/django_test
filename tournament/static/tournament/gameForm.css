@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.center {
+    text-align: center;
+}
+
+.form {
+    font-family: Roboto;
+    display: inline-block;
+    min-width: 30%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form h1 {
+    background-color: lightseagreen;
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+.form form {
+    text-align: left;
+    font-size: 1.3rem;
+    background-color: lightgrey;
+    padding: 2rem;
+}
+
+.form label {
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+.form input, .form select {
+    font-family: Roboto;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 2px;
+}
+
+.flex-container {
+    display: flex;
+    margin: 2rem 1rem;
+}
+
+.checkbox-container {
+    position: relative;
+    width: 100%;
+    text-align: right;
+}
+
+.checkbox-container input {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    transform: scale(3.5);
+    opacity: 0;
+    cursor: pointer;
+    width: auto;
+    padding: 1rem;
+}
+
+.checkbox-container span {
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    cursor: pointer;
+    text-align: center;
+}
+
+.checkbox-container:hover + span {
+    background-color: gray;
+}
+
+.checkbox-container input:checked + span {
+    background-color: lightseagreen;
+}
+
+.checkbox-container input:checked + span::after {
+    content: "\2713";
+}
+.form .button-container {
+    text-align: right;
+}
+
+.form button {
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border: none;
+    border-radius: 2px;
+}
+
+.form button {
+    cursor: pointer;
+}
+
+.form button:focus {
+    outline: none;
+}
+
+.right {
+    text-align: right;
+    width: 100%;
+}
+
+.left {
+    text-align: left;
+    width: 100%;
+}

@@ -8,12 +8,13 @@
 
 {% block content %}
     <div class="game">
-        <h1>Round {{ game.round }}</h1>
+        <h1 class="round">Round {{ game.round }}</h1>
         <div class="team-container">
             <h3 class="team-item">{{ game.team_1.name }}</h3>
             <h3 class="team-item">{{ game.team_2.name }}</h3>
             <h4 class="team-item">{{ game.score_team_1 }}</h4>
             <h4 class="team-item">{{ game.score_team_2 }}</h4>
+            <h1 class="lineup">Lineup</h1>
             {% if home_ratings %}
                 <div>
                     {% for rating in home_ratings %}
@@ -23,11 +24,14 @@
             {% endif %}
             {% if away_ratings %}
                 <div>
-                    {% for player in away_ratings %}
+                    {% for rating in away_ratings %}
                         <h4 class="team-item">{{ rating.player }} - {{ rating.rating }}</h4>
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>    
+        </div>  
+        {% if team_1_coach or team_2_coach %}
+            <a href="/tournament/game/{{ game.id }}/rating" class="add-rating">Add Player</a>  
+        {% endif %}
     </div>
 {% endblock %}

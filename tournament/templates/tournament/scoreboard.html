@@ -42,7 +42,7 @@
         <h1>Round {{ i }}</h1>
         {% for game in games %}
             {% if game.round == i %}
-            <a a href="/tournament/game/{{ game.id }}">
+            <a href="/tournament/game/{{ game.id }}">
                 <div class="display-results">
                     <div class="left"><h3>{{ game.team_1.name }}</h3></div>
                     <div class="right"><h3>{{ game.score_team_1|default_if_none:"-" }}</h3></div>

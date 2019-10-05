@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.game h1 {
+.game .round {
     padding: 2rem;
     background-color: lightseagreen;
     margin-bottom: 1px;
@@ -20,9 +20,33 @@
     grid-template-columns: 50% 50%;
 }
 
+.lineup {
+    background-color: lightseagreen;
+    grid-column: 1 / span 2;
+    margin: 1px;
+    padding: 1rem 2rem;
+}
+
 .game .team-item {
     margin: 0;
     padding: 1rem;
     background-color: lightgray;
     border: solid 1px white;
+}
+
+.add-rating, .add-rating:visited {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black;
+    background-color: lightseagreen;
+    float: right;
+    margin-top: 2rem;
+    margin-right: 1px;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.add-rating:hover {
+    background-color: black;
+    color: lightseagreen;
 }

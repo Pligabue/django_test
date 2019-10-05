@@ -12,6 +12,9 @@
         <form action="{{ url }}" method="post">
             {% csrf_token %}
             {{ form }}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
             <div class="button-container">
                 <button>Submit</button>
             </div>

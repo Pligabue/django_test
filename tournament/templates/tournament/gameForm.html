@@ -1,0 +1,39 @@
+
+{% extends "tournament\header.html" %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tournament\gameForm.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <h1>New Game</h1>
+        <form action="{{ url }}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="flex-container">
+                    {{ field.errors }}
+                    {{ field.label_tag }} 
+                    {% if field.html_name == "home" %}
+                    <div class="checkbox-container">
+                        {{ field }}
+                        <span />
+                    </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+            <div class="button-container">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

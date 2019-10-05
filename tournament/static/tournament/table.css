@@ -21,6 +21,7 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2rem;
 }
 
 .table th {
@@ -51,6 +52,7 @@
 .games .display-results {
     background-color: lightgray;
     border-bottom: solid white 1px;
+    margin: 0 1px;
 }
 
 .games .display-results h3 {

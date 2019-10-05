@@ -15,6 +15,8 @@ class Game(models.Model):
     team_2 = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="away")
     score_team_1 = models.IntegerField(null=True, blank=True)
     score_team_2 = models.IntegerField(null=True, blank=True)
+    approved_1 = models.BooleanField(default=False)
+    approved_2 = models.BooleanField(default=False)
 
     def __str__(self):
         return (str(self.round) + ": " + str(self.team_1) + " vs " + str(self.team_2) + " (" + str(self.score_team_1) + " x " + str(self.score_team_2) + ")")
@@ -27,12 +29,15 @@ class Player(models.Model):
     games = models.ManyToManyField(Game, through="Rating")
 
     def __str__(self):
-        return self.name
+        return (self.name + " " + self.surname)
+
+    def get_full_name(self):
+        return (self.name + " " + self.surname)
     
 class Rating(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="ratings")
-    rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    rating = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self):
         return str(self.game) + " : " + str(self.player)
