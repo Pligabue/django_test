@@ -1,2 +1,33 @@
 {% extends "tournament\header.html" %}
 
+{% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+        .home {
+            display: inline-block;
+            font-family: Roboto;
+            margin-top: 2rem;
+        }
+
+        .home h1 {
+            background-color: lightseagreen;
+            padding: 1rem 2rem;
+            margin: 0;
+        }
+
+        .home h2 {
+            background-color: lightgray;
+            font-weight: normal;
+            padding: 1rem 2rem;
+            margin: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <h1>Welcome to the Tournament page!</h1>
+        <h2>You can register your team and manage your games!</h2>
+    </div>
+{% endblock %}

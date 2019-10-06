@@ -29,7 +29,6 @@ def home(request):
 
 def scoreboard(request):
     teams = Team.objects.all()
-    teamList = []
 
     for team in teams:
         team.wins = 0
@@ -61,8 +60,7 @@ def scoreboard(request):
             
         team.points = 3*team.wins + 1*team.ties
         team.games = team.wins + team.losses + team.ties
-        teamList.append(team) 
-    teamList.sort(key=lambda x: (-x.points, -x.wins, -x.goal_difference, x.name))
+    teams = sorted(teams, key=lambda x: (-x.points, -x.wins, -x.goal_difference, x.name))
     
     games = Game.objects.filter(approved_1=True, approved_2=True)
     try:
@@ -71,7 +69,7 @@ def scoreboard(request):
     except:
         rounds = []
 
-    return render(request, "tournament/scoreboard.html", {"teams" : teamList, "games": games, "rounds": rounds})
+    return render(request, "tournament/scoreboard.html", {"teams" : teams, "games": games, "rounds": rounds})
 
 def players(request):
     players = Player.objects.all()
@@ -83,6 +81,7 @@ def players(request):
             for i, rating in enumerate(ratings):
                 player.rating += float(rating.rating)
             player.rating = round(player.rating/(i+1), 2)
+    players = sorted(players, key=lambda x: (x.name, x.nGames))
     return render(request, "tournament/players.html", {"players" : players})
 
 def loginCoach(request):
