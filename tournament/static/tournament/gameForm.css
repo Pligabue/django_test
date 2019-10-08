@@ -76,8 +76,8 @@
     text-align: center;
 }
 
-.checkbox-container:hover + span {
-    background-color: gray;
+.checkbox-container input:hover + span {
+    background-color: rgba(32, 178, 171, 0.5);
 }
 
 .checkbox-container input:checked + span {

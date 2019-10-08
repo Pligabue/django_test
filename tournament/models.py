@@ -45,7 +45,7 @@ class Rating(models.Model):
 
 class Coach(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    team = models.OneToOneField(Team, on_delete=models.SET_NULL, null=True, related_name="coach")
+    team = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="coach")
     birthday = models.DateField()
 
     def __str__(self):

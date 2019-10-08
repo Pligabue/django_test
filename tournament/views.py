@@ -81,7 +81,7 @@ def players(request):
             for i, rating in enumerate(ratings):
                 player.rating += float(rating.rating)
             player.rating = round(player.rating/(i+1), 2)
-    players = sorted(players, key=lambda x: (x.name, x.nGames))
+    players = sorted(players, key=lambda x: (-x.nGames, x.name))
     return render(request, "tournament/players.html", {"players" : players})
 
 def loginCoach(request):
