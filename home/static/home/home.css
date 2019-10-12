@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     padding: 1rem;
+    font-family: Roboto;
 }
 
 .flex-container > div {
@@ -25,7 +26,6 @@
     box-sizing: border-box;
     padding: 16rem 2rem;
     width: 100%;
-    font-family: Roboto;
     font-size: 3rem;
     font-weight: bold;
     text-decoration: none;
